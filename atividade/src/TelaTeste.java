@@ -18,76 +18,12 @@ public class TelaTeste extends JFrame {
     private JButton bntApagar;
     private JButton bntMostrar;
     private JButton bntFake;
-    private JTextArea textArea;
+    private JTextArea  textArea;
     private JPanel painelBotoes;
     public JPanel painelPrincipal;
     private ArrayList<Object[]> pessoas = new ArrayList<>();
 
     public TelaTeste() {
-        setTitle("Cadastro de Pessoas");
-        setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        painelPrincipal = new JPanel(new BorderLayout()); // Usando BorderLayout
-        JPanel painelCampos = new JPanel(new GridLayout(10, 2, 10, 10)); // GridLayout com 3 linhas e 2 colunas
-
-        txtNome = new JLabel("Nome:");
-        textField1 = new JTextField();
-        txtAltura = new JLabel("Altura:");
-        textField2 = new JTextField();
-        txtPeso = new JLabel("Peso:");
-        textField3 = new JTextField();
-
-        painelCampos.add(txtNome);
-        painelCampos.add(textField1);
-        painelCampos.add(txtAltura);
-        painelCampos.add(textField2);
-        painelCampos.add(txtPeso);
-        painelCampos.add(textField3);
-
-        painelPrincipal.add(painelCampos, BorderLayout.NORTH); // Adicionando os campos ao painel principal na parte superior
-
-        bntCadastrar = new JButton("Cadastrar");
-        bntLocalizar = new JButton("Localizar");
-        bntEditar = new JButton("Editar");
-        bntApagar = new JButton("Apagar");
-        bntMostrar = new JButton("Mostrar");
-        bntFake = new JButton("Fake");
-
-        painelBotoes = new JPanel(new GridBagLayout()); // Usando GridBagLayout para flexibilidade
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaçamento entre os botões
-
-        painelBotoes.add(bntCadastrar, gbc);
-
-        gbc.gridx = 1;
-        painelBotoes.add(bntLocalizar, gbc);
-
-        gbc.gridx = 2;
-        painelBotoes.add(bntEditar, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        painelBotoes.add(bntApagar, gbc);
-
-        gbc.gridx = 1;
-        painelBotoes.add(bntMostrar, gbc);
-
-        gbc.gridx = 2;
-        painelBotoes.add(bntFake, gbc);
-
-        painelPrincipal.add(painelBotoes, BorderLayout.CENTER); // Adicionando os botões ao painel principal no centro
-
-        textArea = new JTextArea();
-        textArea.setPreferredSize(new Dimension(380, 100)); // Definindo tamanho preferido da JTextArea
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
-        painelPrincipal.add(scrollPane, BorderLayout.SOUTH); // Adicionando a área de texto ao painel principal na parte inferior
-
-        add(painelPrincipal);
 
         // ActionListener para o botão Cadastrar
         bntCadastrar.addActionListener(new ActionListener() {
@@ -206,15 +142,29 @@ public class TelaTeste extends JFrame {
                 }
             }
         });
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+
+        bntFake.addActionListener(new ActionListener() {
             @Override
-            public void run() {
-                TelaTeste tela = new TelaTeste();
-                tela.setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                String[] nomes = {"João", "Maria", "José", "Ana", "Carlos", "Fernanda", "Paulo", "Clara", "Lucas", "Beatriz"};
+                double[] alturas = {1.50, 1.60, 1.70, 1.80, 1.90, 2.00, 1.55, 1.65, 1.75, 1.85};
+                double[] pesos = {50.0, 60.0, 70.0, 80.0, 90.0, 100.0, 55.0, 65.0, 75.0, 85.0};
+
+                int numeroDeRegistros = (int) (Math.random() * 10) + 1;
+
+                for (int i = 0; i < numeroDeRegistros; i++) {
+                    String nome = nomes[(int) (Math.random() * nomes.length)];
+                    double altura = alturas[(int) (Math.random() * alturas.length)];
+                    double peso = pesos[(int) (Math.random() * pesos.length)];
+                    Object[] novaPessoa = {nome, altura, peso};
+                    pessoas.add(novaPessoa);
+                }
+                JOptionPane.showMessageDialog(null, "Registros fake gerados com sucesso");
             }
         });
+
     }
+
+
 }
