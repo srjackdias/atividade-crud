@@ -1,11 +1,14 @@
-public class Livro  extends Pedido {
+public class Livro extends Pedido {
 
-    String nome;
-
+    private String nome;
 
     public Livro(int id, String nome) {
         super(id);
         this.nome = nome;
+    }
+
+    public void atenderPedidoLivro() {
+        System.out.println("1: " + getId() + " Atendendo pedido de livro: " + nome);
     }
 
     public String getNome() {
@@ -16,6 +19,3 @@ public class Livro  extends Pedido {
         this.nome = nome;
     }
 }
-
-
-
